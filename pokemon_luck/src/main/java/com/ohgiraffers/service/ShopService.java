@@ -1,2 +1,4 @@
-package com.ohgiraffers.service;public class ShopService {
+package com.ohgiraffers.service;
+
+public class ShopService {
 }

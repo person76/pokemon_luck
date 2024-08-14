@@ -1,2 +1,4 @@
-package com.ohgiraffers.service;public class HuntingService {
+package com.ohgiraffers.service;
+
+public class HuntingService {
 }
