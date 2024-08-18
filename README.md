@@ -166,7 +166,7 @@
 - 볼을 보유하지 않고, 볼을 구매할 최소한의 골드도 보유하지 않고 있다면 게임이 종료됩니다. 따라서 포켓몬 볼과 골드가 모두 소모되지 않도록 신중하게 사냥을 진행하세요.
 - 신 등급 포켓몬 아르세우스의 포획 확률은 매우 낮습니다. 아르세우스를 만났다면 가지고 있는 포켓몬볼의 등급과 개수를 고려해 무리한 사냥을 삼가세요.
 
-## **🖥️ 실행 화면**
+## **🖥️ 게임 실행 화면**
 
 - 시작 화면 및 메인화면, 내 정보 확인
 <img src="https://github.com/user-attachments/assets/301b9fa7-244b-46cf-bea1-e6b2326119de">
@@ -182,3 +182,17 @@
 
 - 상점 이용하기
 <img src="https://github.com/user-attachments/assets/d0fd18b8-afc7-4c17-b277-7ed4325c58e0">
+
+## **🖥️ 게임 종료**
+
+- 게임 오버
+  
+  : 포켓몬 볼을 보유하고 있지 않고, 가장 저렴한 몬스터볼을 구입할 골드도 남아있지 않으면 게임 오버된다.
+  <img src="https://github.com/user-attachments/assets/f3d3a2b6-4856-4332-80d4-37e06fb28aba
+">
+
+- 게임 클리어
+
+  : 신 등급 포켓몬을 포획하면 게임이 클리어 된다.
+  <img src="https://github.com/user-attachments/assets/8da41463-735e-46c8-a095-2007394f3a06
+">
