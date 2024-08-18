@@ -1,4 +1,4 @@
-# 운빨포켓몬(Pokemon_luck)
+![시작 메인 내정보](https://github.com/user-attachments/assets/d315cfa6-ec7c-4a93-9055-14646918c9cd)# 운빨포켓몬(Pokemon_luck)
 
 ## 👥 **멤버**
 | 구대윤 | 임서연 | 
@@ -169,4 +169,5 @@
 ## **실행 화면**
 
 - 시작 화면 및 메인화면, 내 정보 확인
-  <img src="https://github.com/user-attachments/assets/b3136867-191c-4501-82a8-b8f138c30e86">
+  <img src="![시작 메인 내정보](https://github.com/user-attachments/assets/23404a5b-2ed3-49ea-9403-06680e1ae80c)
+">
