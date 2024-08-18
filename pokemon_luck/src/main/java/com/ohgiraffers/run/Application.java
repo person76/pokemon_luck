@@ -1,6 +1,7 @@
 package com.ohgiraffers.run;
 
 import com.ohgiraffers.aggregate.Player;
+import com.ohgiraffers.repository.PlayerRepository;
 import com.ohgiraffers.repository.PokemonRepository;
 import com.ohgiraffers.service.HuntingService;
 import com.ohgiraffers.service.PlayerService;
@@ -24,16 +25,16 @@ public class Application {
                 "                                                                                                                                  ";
         System.out.println(art);
 
-        Player player = new Player();
-        System.out.println(player);
+        // PlayerRepository에서 Player 객체를 불러옴
+        PlayerRepository playerRepository = new PlayerRepository();
+        Player player = playerRepository.getPlayer();
 
         PokemonRepository pokemonRepository = new PokemonRepository();
-        PlayerService playerService = new PlayerService(player);
+        PlayerService playerService = new PlayerService(playerRepository);
         ShopService shopService = new ShopService();
         HuntingService huntingService = new HuntingService(pokemonRepository);
 
-
-        while(true){
+        while(true) {
             System.out.println("\n======= POKEMON LUCK 메인화면 =======");
             System.out.println("1. 내 정보 확인");
             System.out.println("2. 상점");
@@ -42,21 +43,23 @@ public class Application {
             System.out.print("행동 선택 : ");
             int choice = scanner.nextInt();
 
-            switch(choice) {
-                case 1: playerService.findPlayerInfo();
+            switch (choice) {
+                case 1:
+                    playerService.findPlayerInfo(player);
                     break;
-                case 2: shopService.enterShop(player);
+                case 2:
+                    shopService.enterShop(player);
                     break;
-                case 3: huntingService.selectHuntingGround(player);
+                case 3:
+                    huntingService.selectHuntingGround(player);
                     break;
                 case 9:
-                    System.out.println("POKEMON LUCK을 종료합니다."); return;
+                    System.out.println("POKEMON LUCK을 종료합니다.");
+                    playerRepository.savePlayer(player);
+                    return;
                 default:
-                    System.out.println("번호를 잘 못 입력했습니다.");
+                    System.out.println("번호를 잘못 입력했습니다.");
             }
         }
-
-
-
     }
 }
