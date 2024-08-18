@@ -39,6 +39,8 @@ public class Application {
 
         while(true) {
             if (gameTerminationService.checkGameOverCondition(player, shopService)) {
+                System.out.println("\n======== 게임 오버 =======");
+                System.out.println("보유한 포켓몬볼이 없고 소지금이 부족하여 게임 오버되었습니다.");
                 gameTerminationService.terminateGame(player);
             }
 

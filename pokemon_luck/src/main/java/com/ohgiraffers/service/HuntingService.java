@@ -148,7 +148,8 @@ public class HuntingService {
 
                         // "아르세우스" 포획 시 종료 처리
                         if (pokemonInfo.getName().equals("아르세우스")) {
-                            System.out.println("GOD 포켓몬 아르세우스를 포획했습니다!");
+                            System.out.println("======= GOD 포켓몬 아르세우스를 포획했습니다! =======");
+                            System.out.println("!!! 게임 클리어 !!!");
                             GameTerminationService gameTerminationService = new GameTerminationService();
                             gameTerminationService.terminateGame(player);
                         }
