@@ -22,12 +22,6 @@ public class Player implements Serializable {
         playerBall.put(BallType.MASTERBALL, 0);
     }
 
-    public Player(int gold, Map<BallType, Integer> playerBall, ArrayList<PokemonInfo> playerPokemon) {
-        this.gold = gold;
-        this.playerBall = playerBall;
-        this.playerPokemon = playerPokemon;
-    }
-
     public int getGold() {
         return gold;
     }

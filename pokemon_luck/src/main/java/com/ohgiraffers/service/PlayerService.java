@@ -3,12 +3,10 @@ package com.ohgiraffers.service;
 import com.ohgiraffers.aggregate.BallType;
 import com.ohgiraffers.aggregate.Player;
 import com.ohgiraffers.aggregate.PokemonInfo;
-import com.ohgiraffers.repository.PlayerRepository;
 
 import java.util.Map;
 
 public class PlayerService {
-    private final PlayerRepository playerRepository = new PlayerRepository();
     Player player;
 
     public PlayerService(Player player) {

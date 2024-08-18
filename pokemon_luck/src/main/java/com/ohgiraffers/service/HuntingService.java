@@ -57,7 +57,7 @@ public class HuntingService {
                 System.out.print(".");
             }
             Thread.sleep(500);  // 추가 대기
-            System.out.println();  // 줄 바꿈
+            System.out.println();
 
             PokemonInfo foundPokemon = findPokemon(HuntingPlaceGrade);
 
@@ -290,9 +290,9 @@ public class HuntingService {
         else if(HuntingPlaceGrade==2){
             if (chance <= 10) {
                 foundPokemon = getRandomPokemonByGrade("NORMAL");
-            } else if (chance <= 50) {
+            } else if (chance <= 60) {
                 foundPokemon = getRandomPokemonByGrade("UNIQUE");
-            } else if (chance <= 39 ){
+            } else if (chance <= 99 ){
                 foundPokemon = getRandomPokemonByGrade("LEGENDARY");
             }
             else{
@@ -325,7 +325,5 @@ public class HuntingService {
             }
             return null;
     }
-
-
 
 }
