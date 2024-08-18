@@ -189,9 +189,9 @@ public class HuntingService {
          */
         if (pokemonGrade.equals(PokemonGrade.NORMAL)) {
             if (ballType.equals(MONSTERBALL)) {
-                isSuccess = chance <= 5000;
+                isSuccess = chance <= 6000;
             } else if (ballType.equals(SUPERBALL)) {
-                isSuccess = chance <= 7000;
+                isSuccess = chance <= 9000;
             } else {
                 isSuccess = true;
             }
