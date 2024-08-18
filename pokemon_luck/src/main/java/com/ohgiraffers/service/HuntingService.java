@@ -7,6 +7,7 @@ import com.ohgiraffers.repository.PokemonRepository;
 import com.ohgiraffers.aggregate.PokemonInfo;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -19,20 +20,25 @@ public class HuntingService {
         this.pokemonRepository = pokemonRepository;
     }
 
-    public void selectHuntingGround(Player player){
+    public void selectHuntingGround(Player player) {
+        // 사냥터에 입장하기 전에 모든 볼의 개수가 0인지 확인
+        if (areAllBallsZero(player)) {
+            System.out.println("모든 포켓몬 볼이 없습니다. 메인화면으로 돌아갑니다.");
+            return;  // 메인화면으로 돌아감
+        }
+
         Scanner scanner = new Scanner(System.in);
-        while (true){
+        while (true) {
             System.out.println("\n======= 사냥터 입구 =======");
             System.out.println("입장하실 사냥터를 선택해주세요.");
             System.out.println("1. 초급 사냥터 \n2. 중급 사냥터 \n3. 고급 사냥터");
             System.out.println("입장할 사냥터 번호: ");
             int huntPlaceNum = scanner.nextInt();
-            if(huntPlaceNum==1 || huntPlaceNum == 2 || huntPlaceNum ==3){
-                startHunting(player,huntPlaceNum);
+            if (huntPlaceNum == 1 || huntPlaceNum == 2 || huntPlaceNum == 3) {
+                startHunting(player, huntPlaceNum);
                 break;
-            }
-            else{
-                System.out.println("사냥터 번호가 유효하지 않습니다. 1,2,3 중 하나를 입력해주세요");
+            } else {
+                System.out.println("사냥터 번호가 유효하지 않습니다. 1, 2, 3 중 하나를 입력해주세요");
             }
         }
     }
@@ -92,22 +98,25 @@ public class HuntingService {
     }
     //선택한 등급의 사냥터에서 포켓몬 탐색(findPokemon 호출) 후 사냥 진행(huntingGround 호출) or return.
 
-    private void hunting(PokemonInfo pokemonInfo, Player player){
+    private void hunting(PokemonInfo pokemonInfo, Player player) {
         while (true) {
-            if(player.getPlayerBall()==null){
+            // 사냥을 시작하기 전에 볼이 모두 없는지 확인
+            if (areAllBallsZero(player)) {
                 System.out.println("몬스터볼을 모두 소진하였습니다. 메인화면으로 돌아갑니다.");
                 return;
             }
+
             Scanner scanner = new Scanner(System.in);
             System.out.println("사냥에 사용할 볼을 선택해주세요.");
-            System.out.println("1. 몬스터볼 \n2. 슈퍼볼\n3.하이퍼볼\n4.마스터볼");
+            System.out.println("1. 몬스터볼 \n2. 슈퍼볼\n3. 하이퍼볼\n4. 마스터볼");
             System.out.println("=== 보유한 볼 정보 ===");
             System.out.println(player.getPlayerBall());
             System.out.println("번호 입력: ");
             int choiceBall = scanner.nextInt();
             int cnt = 0;
             BallType selectBallType = null;
-            while (true){
+
+            while (true) {
                 switch (choiceBall) {
                     case 1:
                         cnt = player.getPlayerBallByType(MONSTERBALL);
@@ -123,17 +132,16 @@ public class HuntingService {
                         break;
                     case 4:
                         cnt = player.getPlayerBallByType(MASTERBALL);
-                        selectBallType = MONSTERBALL;
+                        selectBallType = MASTERBALL;
                         break;
                     default:
                         System.out.println("잘못된 입력입니다. 1, 2, 3, 4 중에서 선택해주세요.");
                 }
 
-                if(cnt==0){
+                if (cnt == 0) {
                     System.out.println("해당 볼을 보유하고 있지 않습니다. 다른 볼을 선택해주세요.");
                     break;
-                }
-                else {
+                } else {
                     boolean huntSuccess = isHuntingSuccessful(pokemonInfo.getGrade(), selectBallType);
                     player.useBall(selectBallType);
                     if (huntSuccess) {
@@ -147,7 +155,7 @@ public class HuntingService {
 
                     } else {
                         System.out.println(pokemonInfo.getName() + "을(를) 포획하지 못했습니다.");
-                        while(true) {
+                        while (true) {
                             System.out.println("다시 시도하겠습니까?(Y/N): ");
                             scanner = new Scanner(System.in);
                             char ch = scanner.next().charAt(0);
@@ -162,12 +170,8 @@ public class HuntingService {
                         }
                     }
                 }
-
-
             }
-
         }
-
     }
     // 사냥 진행. hunting 호출해서 성공여부 반환받아 player 소지금 및 소지 포켓몬볼 정보 갱신
 
@@ -324,6 +328,12 @@ public class HuntingService {
                 return pokemons.get(random.nextInt(pokemons.size()));
             }
             return null;
+    }
+
+    // 모든 볼의 개수가 0인지 확인하는 메서드
+    private boolean areAllBallsZero(Player player) {
+        Map<BallType, Integer> playerBalls = player.getPlayerBall();
+        return playerBalls.values().stream().allMatch(count -> count == 0);
     }
 
 }
