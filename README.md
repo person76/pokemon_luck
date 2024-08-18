@@ -106,8 +106,7 @@
 - **사냥 시작**
     - 총 3종류의 사냥터가 존재하고, 사냥터 등급 별 포켓몬의 등장 확률은 아래와 같습니다.
 <details>
-<summary>1. 초급 사냥터</summary>
-<div style="margin-left: 20px;">
+<summary style="margin-left: 20px;">1. 초급 사냥터</summary>
 - **포켓몬 등장 확률**
   
     - 일반 포켓몬: 70%
@@ -117,7 +116,7 @@
 </details>
 
 <details>
-<summary>2. 중급 사냥터</summary>
+<summary style="margin-left: 20px;">2. 중급 사냥터</summary>
 
 - **포켓몬 등장 확률**
   
@@ -129,7 +128,7 @@
 </details>
 
 <details>
-<summary>3. 고급 사냥터</summary>
+<summary style="margin-left: 20px;">3. 고급 사냥터</summary>
 
 - **포켓몬 등장 확률**
   
