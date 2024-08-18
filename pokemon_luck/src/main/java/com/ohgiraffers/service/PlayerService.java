@@ -38,4 +38,16 @@ public class PlayerService {
             }
         }
     }
+
+    public boolean checkPlayerStatus(Player player, ShopService shopService) {
+        // 모든 볼의 개수가 0인지 확인
+        Map<BallType, Integer> playerBalls = player.getPlayerBall();
+        boolean allBallsZero = playerBalls.values().stream().allMatch(count -> count == 0);
+
+        // 가장 적은 금액의 볼을 살 수 있는지 확인 (가장 싼 볼의 가격)
+        int cheapestBallPrice = shopService.getCheapestBallPrice();
+        boolean canAffordBall = player.getGold() >= cheapestBallPrice;
+
+        return allBallsZero && !canAffordBall;
+    }
 }
