@@ -3,8 +3,8 @@ package com.ohgiraffers.service;
 import com.ohgiraffers.aggregate.BallType;
 import com.ohgiraffers.aggregate.Player;
 import com.ohgiraffers.aggregate.PokemonGrade;
-import com.ohgiraffers.repository.PokemonRepository;
 import com.ohgiraffers.aggregate.PokemonInfo;
+import com.ohgiraffers.repository.PokemonRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +16,7 @@ import static com.ohgiraffers.aggregate.BallType.*;
 public class HuntingService {
 
     private final PokemonRepository pokemonRepository;
+
     public HuntingService(PokemonRepository pokemonRepository) {
         this.pokemonRepository = pokemonRepository;
     }
@@ -42,20 +43,17 @@ public class HuntingService {
             }
         }
     }
-    // 사냥터 선택 화면. 선택 후 enterHuntingGround 호출
 
-    private void startHunting(Player player, int HuntingPlaceGrade)  {
+    private void startHunting(Player player, int HuntingPlaceGrade) {
         String HuntingPlaceName = " ";
-        if(HuntingPlaceGrade==1){
+        if (HuntingPlaceGrade == 1) {
             HuntingPlaceName = "초급";
-        }
-        else if(HuntingPlaceGrade==2){
+        } else if (HuntingPlaceGrade == 2) {
             HuntingPlaceName = "중급";
-        }
-        else {
+        } else {
             HuntingPlaceName = "고급";
         }
-        System.out.println( HuntingPlaceName + "사냥터에 입장합니다.");
+        System.out.println(HuntingPlaceName + "사냥터에 입장합니다.");
         try {
             System.out.print("포켓몬을 탐색중입니다");
             for (int i = 0; i < 3; i++) {  // 점 3개 출력
@@ -67,9 +65,8 @@ public class HuntingService {
 
             PokemonInfo foundPokemon = findPokemon(HuntingPlaceGrade);
 
-
             System.out.println("야생의 " + foundPokemon.getName() + "(이)가 나타났다!");
-            System.out.println("포켓몬 등급: "+foundPokemon.getGrade());
+            System.out.println("포켓몬 등급: " + foundPokemon.getGrade());
 
             System.out.println("행동 선택");
             System.out.println("1. 도망가기");
@@ -79,7 +76,7 @@ public class HuntingService {
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
 
-            switch (choice){
+            switch (choice) {
                 case 1:
                     System.out.print("사냥터를 빠져나오는 중입니다");
                     for (int i = 0; i < 3; i++) {  // 점 3개 출력
@@ -88,15 +85,13 @@ public class HuntingService {
                     }
                     return;
                 case 2:
-                    hunting(foundPokemon,player);
-
+                    hunting(foundPokemon, player);
             }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-    //선택한 등급의 사냥터에서 포켓몬 탐색(findPokemon 호출) 후 사냥 진행(huntingGround 호출) or return.
 
     private void hunting(PokemonInfo pokemonInfo, Player player) {
         while (true) {
@@ -150,6 +145,14 @@ public class HuntingService {
 
                         player.addPokemon(pokemonInfo);
                         player.setGold(player.getGold() + pokemonInfo.getGrade().getPokemonGold());
+
+                        // "아르세우스" 포획 시 종료 처리
+                        if (pokemonInfo.getName().equals("아르세우스")) {
+                            System.out.println("GOD 포켓몬 아르세우스를 포획했습니다!");
+                            GameTerminationService gameTerminationService = new GameTerminationService();
+                            gameTerminationService.terminateGame(player);
+                        }
+
                         System.out.println("메인화면으로 돌아갑니다.");
                         return;
 
@@ -173,115 +176,69 @@ public class HuntingService {
             }
         }
     }
-    // 사냥 진행. hunting 호출해서 성공여부 반환받아 player 소지금 및 소지 포켓몬볼 정보 갱신
 
-    private boolean isHuntingSuccessful(PokemonGrade pokemonGrade, BallType ballType){
+    private boolean isHuntingSuccessful(PokemonGrade pokemonGrade, BallType ballType) {
         boolean isSuccess;
         Random random = new Random();
         int chance = random.nextInt(10000) + 1;
         /*
-        * # 일반 포켓몬 - 몬스터볼 : 50퍼 - 슈퍼볼 : 80퍼 - 하이퍼볼 : 100퍼 - 마스터볼 : 100퍼
-        * # 유니크 포켓몬 - 몬스터볼 : 10퍼 - 슈퍼볼 : 50퍼 - 하이퍼볼 : 75퍼 - 마스터볼 : 100퍼
-        * # 전설 포켓몬- 몬스터볼 : 3퍼 - 슈퍼볼 : 15퍼 - 하이퍼볼 : 40퍼 - 마스터볼 : 70퍼
-        * # 신 포켓몬 - 몬스터볼 : 0.01퍼 - 슈퍼볼 : 0.1퍼 - 하이퍼볼 : 1퍼 - 마스터볼 : 5퍼
-        * */
-        if(pokemonGrade.equals(PokemonGrade.NORMAL)) {
-            if(ballType.equals(MONSTERBALL)) {
-                if(chance<=5000) isSuccess =true;
-                else isSuccess =false;
-            }
-
-            else if(ballType.equals(SUPERBALL)) {
-                if(chance<=7000) isSuccess =true;
-                else isSuccess =false;
-            }
-
-            else  {
+         * # 일반 포켓몬 - 몬스터볼 : 50퍼 - 슈퍼볼 : 80퍼 - 하이퍼볼 : 100퍼 - 마스터볼 : 100퍼
+         * # 유니크 포켓몬 - 몬스터볼 : 10퍼 - 슈퍼볼 : 50퍼 - 하이퍼볼 : 75퍼 - 마스터볼 : 100퍼
+         * # 전설 포켓몬- 몬스터볼 : 3퍼 - 슈퍼볼 : 15퍼 - 하이퍼볼 : 40퍼 - 마스터볼 : 70퍼
+         * # 신 포켓몬 - 몬스터볼 : 0.01퍼 - 슈퍼볼 : 0.1퍼 - 하이퍼볼 : 1퍼 - 마스터볼 : 5퍼
+         */
+        if (pokemonGrade.equals(PokemonGrade.NORMAL)) {
+            if (ballType.equals(MONSTERBALL)) {
+                isSuccess = chance <= 5000;
+            } else if (ballType.equals(SUPERBALL)) {
+                isSuccess = chance <= 7000;
+            } else {
                 isSuccess = true;
             }
-        }
-
-        else if(pokemonGrade.equals(PokemonGrade.UNIQUE)) {
-            if(ballType.equals(MONSTERBALL)) {
-                if(chance<=1000) isSuccess =true;
-                else isSuccess =false;
-            }
-
-            else if(ballType.equals(SUPERBALL)) {
-                if(chance<=5000) isSuccess =true;
-                else isSuccess =false;
-            }
-
-            else if(ballType.equals(HYPERBALL)) {
-                if(chance<=7500) isSuccess =true;
-                else isSuccess =false;
-            }
-
-            else  {
+        } else if (pokemonGrade.equals(PokemonGrade.UNIQUE)) {
+            if (ballType.equals(MONSTERBALL)) {
+                isSuccess = chance <= 1000;
+            } else if (ballType.equals(SUPERBALL)) {
+                isSuccess = chance <= 5000;
+            } else if (ballType.equals(HYPERBALL)) {
+                isSuccess = chance <= 7500;
+            } else {
                 isSuccess = true;
             }
-
-        }
-
-        else if(pokemonGrade.equals(PokemonGrade.LEGENDARY)) {
-            if(ballType.equals(MONSTERBALL)) {
-                if(chance<=300) isSuccess =true;
-                else isSuccess =false;
+        } else if (pokemonGrade.equals(PokemonGrade.LEGENDARY)) {
+            if (ballType.equals(MONSTERBALL)) {
+                isSuccess = chance <= 300;
+            } else if (ballType.equals(SUPERBALL)) {
+                isSuccess = chance <= 1500;
+            } else if (ballType.equals(HYPERBALL)) {
+                isSuccess = chance <= 4000;
+            } else {
+                isSuccess = chance <= 7000;
             }
-
-            else if(ballType.equals(SUPERBALL)) {
-                if(chance<=1500) isSuccess =true;
-                else isSuccess =false;
+        } else {
+            if (ballType.equals(MONSTERBALL)) {
+                isSuccess = chance <= 1;
+            } else if (ballType.equals(SUPERBALL)) {
+                isSuccess = chance <= 10;
+            } else if (ballType.equals(HYPERBALL)) {
+                isSuccess = chance <= 100;
+            } else {
+                isSuccess = chance <= 1000;
             }
-
-            else if(ballType.equals(HYPERBALL)) {
-                if(chance<=4000) isSuccess =true;
-                else isSuccess =false;
-            }
-
-            else  {
-                if(chance<=7000) isSuccess =true;
-                else isSuccess =false;
-            }
-
-        }
-
-        else {
-            if(ballType.equals(MONSTERBALL)) {
-                if(chance<=1) isSuccess =true;
-                else isSuccess =false;
-            }
-
-            else if(ballType.equals(SUPERBALL)) {
-                if(chance<=10) isSuccess =true;
-                else isSuccess =false;
-            }
-
-            else if(ballType.equals(HYPERBALL)) {
-                if(chance<=100) isSuccess =true;
-                else isSuccess =false;
-            }
-
-            else  {
-                if(chance<=1000) isSuccess =true;
-                else isSuccess =false;
-            }
-
         }
 
         return isSuccess;
     }
-    // 포켓몬 등급, 볼 종류 별 확률에 맞게 포획 진행 후 성공여부 반환.
 
-    private PokemonInfo findPokemon(int HuntingPlaceGrade){
+    private PokemonInfo findPokemon(int HuntingPlaceGrade) {
         PokemonInfo foundPokemon = null;
         Random random = new Random();
         int chance = random.nextInt(100) + 1;  // 1부터 100 사이의 랜덤 숫자
 
         /* 초급 사냥터 : 일반 70퍼 유니크 29퍼 전설 1퍼
         중급 사냥터 : 일반 10퍼 유니크 50퍼 전설 39퍼 신 1퍼
-	    고급 사냥터 : 일반 1퍼 유니크 10퍼 전설 60퍼 신 29퍼 */
-        if(HuntingPlaceGrade==1){
+        고급 사냥터 : 일반 1퍼 유니크 10퍼 전설 60퍼 신 29퍼 */
+        if (HuntingPlaceGrade == 1) {
             if (chance <= 70) {
                 foundPokemon = getRandomPokemonByGrade("NORMAL");
             } else if (chance <= 99) {
@@ -289,45 +246,39 @@ public class HuntingService {
             } else {
                 foundPokemon = getRandomPokemonByGrade("LEGENDARY");
             }
-        }
-
-        else if(HuntingPlaceGrade==2){
+        } else if (HuntingPlaceGrade == 2) {
             if (chance <= 10) {
                 foundPokemon = getRandomPokemonByGrade("NORMAL");
             } else if (chance <= 60) {
                 foundPokemon = getRandomPokemonByGrade("UNIQUE");
-            } else if (chance <= 99 ){
+            } else if (chance <= 99) {
                 foundPokemon = getRandomPokemonByGrade("LEGENDARY");
-            }
-            else{
+            } else {
                 foundPokemon = getRandomPokemonByGrade("GOD");
             }
-        }
-        else{
+        } else {
             if (chance <= 1) {
                 foundPokemon = getRandomPokemonByGrade("NORMAL");
             } else if (chance <= 11) {
                 foundPokemon = getRandomPokemonByGrade("UNIQUE");
-            } else if (chance <= 71 ){
+            } else if (chance <= 71) {
                 foundPokemon = getRandomPokemonByGrade("LEGENDARY");
-            }
-            else{
+            } else {
                 foundPokemon = getRandomPokemonByGrade("GOD");
             }
         }
 
         return foundPokemon;
     }
-    // 사냥터 등급에 따라 확률에 맞춰 탐색한 포켓몬 (huntingGround에) 반환.
 
     private PokemonInfo getRandomPokemonByGrade(String grade) {
         List<PokemonInfo> pokemons = pokemonRepository.getPokemonListByGrade(grade);
 
-            if (!pokemons.isEmpty()) {
-                Random random = new Random();
-                return pokemons.get(random.nextInt(pokemons.size()));
-            }
-            return null;
+        if (!pokemons.isEmpty()) {
+            Random random = new Random();
+            return pokemons.get(random.nextInt(pokemons.size()));
+        }
+        return null;
     }
 
     // 모든 볼의 개수가 0인지 확인하는 메서드
@@ -335,5 +286,4 @@ public class HuntingService {
         Map<BallType, Integer> playerBalls = player.getPlayerBall();
         return playerBalls.values().stream().allMatch(count -> count == 0);
     }
-
 }
