@@ -169,4 +169,4 @@
 ## **실행 화면**
 
 - 시작 화면 및 메인화면, 내 정보 확인
-  <img src="![GIFMaker_me](https://github.com/user-attachments/assets/e168feac-92c7-4d1f-8884-fade89694a9f)">
+  <img src="https://github.com/user-attachments/assets/e168feac-92c7-4d1f-8884-fade89694a9f">
