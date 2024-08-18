@@ -188,11 +188,9 @@
 - 게임 오버
   
   : 포켓몬 볼을 보유하고 있지 않고, 가장 저렴한 몬스터볼을 구입할 골드도 남아있지 않으면 게임 오버된다.
-  <img src="https://github.com/user-attachments/assets/f3d3a2b6-4856-4332-80d4-37e06fb28aba
-">
+<img src="https://github.com/user-attachments/assets/f3d3a2b6-4856-4332-80d4-37e06fb28aba">
 
 - 게임 클리어
 
   : 신 등급 포켓몬을 포획하면 게임이 클리어 된다.
-  <img src="https://github.com/user-attachments/assets/8da41463-735e-46c8-a095-2007394f3a06
-">
+<img src="https://github.com/user-attachments/assets/8da41463-735e-46c8-a095-2007394f3a06">
