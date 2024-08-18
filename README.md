@@ -171,11 +171,14 @@
 - 시작 화면 및 메인화면, 내 정보 확인
 <img src="https://github.com/user-attachments/assets/301b9fa7-244b-46cf-bea1-e6b2326119de">
 
+
 - 사냥터 도망가기
 <img src="https://github.com/user-attachments/assets/21ccbc03-d556-48c9-99bd-b4102219d108">
 
+
 - NORMAL 포켓몬 포획하기
 <img src="https://github.com/user-attachments/assets/6ec191af-368f-4aa2-b06d-8778f0a98883">
+
 
 - 상점 이용하기
 <img src="https://github.com/user-attachments/assets/d0fd18b8-afc7-4c17-b277-7ed4325c58e0">
