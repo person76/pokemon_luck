@@ -3,6 +3,7 @@ package com.ohgiraffers.run;
 import com.ohgiraffers.aggregate.Player;
 import com.ohgiraffers.repository.PlayerRepository;
 import com.ohgiraffers.repository.PokemonRepository;
+import com.ohgiraffers.service.GameTerminationService;
 import com.ohgiraffers.service.HuntingService;
 import com.ohgiraffers.service.PlayerService;
 import com.ohgiraffers.service.ShopService;
@@ -34,30 +35,11 @@ public class Application {
         PlayerService playerService = new PlayerService(playerRepository);
         ShopService shopService = new ShopService();
         HuntingService huntingService = new HuntingService(pokemonRepository);
+        GameTerminationService gameTerminationService = new GameTerminationService();
 
         while(true) {
-            // 게임 종료 조건 확인
-            if (checkGameOverCondition(player, shopService)) {
-                int capturedPokemonCount = player.getPlayerPokemon().size();
-                int usedMonsterBallCount = 5 - player.getPlayerBallByType(com.ohgiraffers.aggregate.BallType.MONSTERBALL);  // 처음에 5개로 시작
-
-                System.out.println("소지한 몬스터볼 개수와 소지금이 부족하여 GAME OVER 됐습니다.");
-                System.out.println("포켓몬을 잡은 횟수: " + capturedPokemonCount);
-                System.out.println("사용한 몬스터볼의 개수: " + usedMonsterBallCount);
-
-                // PlayerDB.dat 파일 삭제
-                File playerDB = new File("src/main/java/com/ohgiraffers/db/PlayerDB.dat");
-                if (playerDB.exists()) {
-                    if (playerDB.delete()) {
-                        System.out.println("PlayerDB.dat 파일을 성공적으로 삭제했습니다.");
-                    } else {
-                        System.out.println("PlayerDB.dat 파일 삭제에 실패했습니다.");
-                    }
-                }
-
-                // 프로그램 종료
-                System.out.println("POKEMON LUCK을 종료합니다.");
-                return;
+            if (gameTerminationService.checkGameOverCondition(player, shopService)) {
+                gameTerminationService.terminateGame(player);
             }
 
             System.out.println("\n======= POKEMON LUCK 메인화면 =======");
