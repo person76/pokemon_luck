@@ -5,6 +5,7 @@ import com.ohgiraffers.aggregate.PokemonInfo;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PokemonRepository {
     private final ArrayList<PokemonInfo> pokemonList = new ArrayList<>();
@@ -70,5 +71,15 @@ public class PokemonRepository {
         }  catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<PokemonInfo> getPokemonListByGrade(String grade) {
+        List<PokemonInfo> filteredList = new ArrayList<>();
+        for (PokemonInfo pokemon : pokemonList) {
+            if (pokemon.getGrade().toString().equals(grade)) {
+                filteredList.add(pokemon);
+            }
+        }
+        return filteredList;
     }
 }

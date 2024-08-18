@@ -6,6 +6,7 @@ public class PokemonInfo implements Serializable {
     private final String name;
     private final PokemonGrade grade;
 
+
     public PokemonInfo(String name, PokemonGrade grade) {
         this.name = name;
         this.grade = grade;
