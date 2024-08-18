@@ -178,5 +178,4 @@
 <img src="https://github.com/user-attachments/assets/6ec191af-368f-4aa2-b06d-8778f0a98883">
 
 - 상점 이용하기
-<img src=" ![상점 볼 구입](https://github.com/user-attachments/assets/d0fd18b8-afc7-4c17-b277-7ed4325c58e0)
-">
+<img src="https://github.com/user-attachments/assets/d0fd18b8-afc7-4c17-b277-7ed4325c58e0">
