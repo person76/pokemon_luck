@@ -169,5 +169,4 @@
 ## **실행 화면**
 
 - 시작 화면 및 메인화면, 내 정보 확인
-  <img src=" ![시작 메인 내정보](https://github.com/user-attachments/assets/301b9fa7-244b-46cf-bea1-e6b2326119de)
-">
+<img src=" ![시작 메인 내정보](https://github.com/user-attachments/assets/301b9fa7-244b-46cf-bea1-e6b2326119de)">
