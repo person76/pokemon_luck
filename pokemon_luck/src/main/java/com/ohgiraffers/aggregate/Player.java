@@ -9,17 +9,10 @@ public class Player implements Serializable {
     private Map<BallType, Integer> playerBall; //볼 정보, 개수 저장
     private ArrayList<PokemonInfo> playerPokemon;
 
-
-    public Player() {
-        this.gold = 0; // 기본 골드 값
-        this.playerBall = new HashMap<>();
-        this.playerPokemon = new ArrayList<>();
-
-        // 기본으로 몬스터볼 5개를 보유
-        playerBall.put(BallType.MONSTERBALL, 5);
-        playerBall.put(BallType.SUPERBALL, 0);
-        playerBall.put(BallType.HYPERBALL, 0);
-        playerBall.put(BallType.MASTERBALL, 0);
+    public Player(int gold, Map<BallType, Integer> playerBall, ArrayList<PokemonInfo> playerPokemon) {
+        this.gold = gold;
+        this.playerBall = playerBall;
+        this.playerPokemon = playerPokemon;
     }
 
     public int getGold() {
