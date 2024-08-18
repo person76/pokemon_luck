@@ -33,7 +33,7 @@ public class HuntingService {
             System.out.println("\n======= 사냥터 입구 =======");
             System.out.println("입장하실 사냥터를 선택해주세요.");
             System.out.println("1. 초급 사냥터 \n2. 중급 사냥터 \n3. 고급 사냥터");
-            System.out.println("입장할 사냥터 번호: ");
+            System.out.print("입장할 사냥터 번호: ");
             int huntPlaceNum = scanner.nextInt();
             if (huntPlaceNum == 1 || huntPlaceNum == 2 || huntPlaceNum == 3) {
                 startHunting(player, huntPlaceNum);
@@ -64,15 +64,15 @@ public class HuntingService {
             System.out.println();
 
             PokemonInfo foundPokemon = findPokemon(HuntingPlaceGrade);
-
+            System.out.println("   !!! 포켓몬 발견 !!!   ");
             System.out.println("야생의 " + foundPokemon.getName() + "(이)가 나타났다!");
             System.out.println("포켓몬 등급: " + foundPokemon.getGrade());
 
-            System.out.println("행동 선택");
+            System.out.println("===== 행동 선택 =====");
             System.out.println("1. 도망가기");
             System.out.println("2. 사냥하기");
 
-            System.out.println("번호 입력: ");
+            System.out.print("번호 입력: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
 
@@ -104,9 +104,9 @@ public class HuntingService {
             Scanner scanner = new Scanner(System.in);
             System.out.println("사냥에 사용할 볼을 선택해주세요.");
             System.out.println("1. 몬스터볼 \n2. 슈퍼볼\n3. 하이퍼볼\n4. 마스터볼");
-            System.out.println("=== 보유한 볼 정보 ===");
+            System.out.println("===== 보유한 볼 정보 =====");
             System.out.println(player.getPlayerBall());
-            System.out.println("번호 입력: ");
+            System.out.print("번호 입력: ");
             int choiceBall = scanner.nextInt();
             int cnt = 0;
             BallType selectBallType = null;
@@ -159,7 +159,7 @@ public class HuntingService {
                     } else {
                         System.out.println(pokemonInfo.getName() + "을(를) 포획하지 못했습니다.");
                         while (true) {
-                            System.out.println("다시 시도하겠습니까?(Y/N): ");
+                            System.out.print("다시 시도하겠습니까?(Y/N): ");
                             scanner = new Scanner(System.in);
                             char ch = scanner.next().charAt(0);
                             if (ch == 'Y') {
