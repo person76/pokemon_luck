@@ -3,17 +3,18 @@ package com.ohgiraffers.service;
 import com.ohgiraffers.aggregate.BallType;
 import com.ohgiraffers.aggregate.Player;
 import com.ohgiraffers.aggregate.PokemonInfo;
+import com.ohgiraffers.repository.PlayerRepository;
 
 import java.util.Map;
 
 public class PlayerService {
-    Player player;
+    private PlayerRepository playerRepository;
 
-    public PlayerService(Player player) {
-        this.player = player;
+    public PlayerService(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
     }
 
-    public void findPlayerInfo() {
+    public void findPlayerInfo(Player player) {
 
         System.out.println("\n======== Player 정보 =========");
         // 플레이어의 골드 출력

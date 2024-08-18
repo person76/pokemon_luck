@@ -193,7 +193,7 @@ public class HuntingService {
             }
 
             else  {
-               isSuccess = true;
+                isSuccess = true;
             }
         }
 
